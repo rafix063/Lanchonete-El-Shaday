@@ -1,0 +1,270 @@
+/* style.css — tema claro, simples e responsivo */
+:root{
+  --bg: #f7f7f8;
+  --card: #ffffff;
+  --muted: #666;
+  --accent: #ff6b35;
+  --success: #19a974;
+  --danger: #e23e57;
+  --shadow: rgba(0,0,0,0.06);
+  --radius: 10px;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:#111;
+  -webkit-font-smoothing:antialiased;
+  padding:24px;
+}
+
+/* container */
+.container{
+  max-width:1100px;
+  margin:0 auto;
+}
+
+/* header */
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+  margin-bottom:20px;
+}
+.logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.logo .brand{
+  font-size:20px;
+  font-weight:700;
+}
+.header a:link, .header a:visited{
+  color:var(--muted);
+}
+
+/* grid for client */
+.grid{
+  display:grid;
+  grid-template-columns: 2fr 1fr;
+  gap:24px;
+}
+
+@media (max-width: 768px){
+  .grid{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* elements */
+.muted{
+  color:var(--muted);
+  font-size:14px;
+}
+.btn{
+  background:var(--accent);
+  color:#fff;
+  border:0;
+  padding:10px 16px;
+  border-radius:var(--radius);
+  font-weight:600;
+  cursor:pointer;
+  transition:all 0.2s;
+  flex-shrink: 0;
+}
+.btn:hover{
+  filter:brightness(1.1);
+}
+.btn.small{
+  padding:6px 10px;
+  font-size:13px;
+}
+.btn.success{background:var(--success)}
+.btn.danger{background:var(--danger)}
+.btn.warning{background:#ffc107; color:#333}
+
+/* --- ESTILOS PARA O CARDÁPIO (MENU - MODO ACORDION/SANFONA) --- */
+
+.category {
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: var(--radius);
+    overflow: hidden; /* Importante para o efeito de colapso */
+}
+
+.category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background: var(--card);
+    cursor: pointer;
+    user-select: none;
+    border-bottom: 1px solid #ddd;
+}
+.category.active .category-header {
+    background: #f0f0f0; /* Cor de fundo diferente quando ativo */
+}
+
+.category h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent);
+    border-bottom: none; /* Remove a borda inferior anterior */
+    padding-bottom: 0;
+}
+
+.toggle-icon {
+    font-size: 18px;
+    transition: transform 0.3s ease;
+}
+
+/* Rotação do ícone quando ativo */
+.category.active .toggle-icon {
+    transform: rotate(180deg);
+}
+
+.items-list {
+    /* Altura inicial de 0 para esconder o conteúdo */
+    max-height: 0; 
+    overflow: hidden;
+    transition: max-height 0.4s ease-out; /* Transição suave */
+    display: flex;
+    flex-direction: column;
+    gap: 0; /* Remove gap entre itens para que a borda pareça contínua */
+}
+
+/* Quando a categoria está ativa, a altura máxima é alta o suficiente para mostrar tudo */
+.category.active .items-list {
+    max-height: 1000px; /* Um valor alto o suficiente para caber todos os itens */
+}
+
+/* Estilo dos itens dentro da lista */
+.menu-item {
+    background: var(--card);
+    padding: 12px 15px;
+    border-radius: 0; /* Remove o border-radius para se integrar à caixa da categoria */
+    box-shadow: none; /* Remove a sombra dos itens */
+    border-top: 1px dashed #eee; /* Separador entre itens */
+}
+.menu-item:first-child {
+    border-top: none; /* Remove o separador do primeiro item */
+}
+
+
+.item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+.item-info {
+    flex-grow: 1;
+}
+.item-name {
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 1.2;
+}
+.item-price {
+    font-weight: 600;
+    color: var(--accent);
+}
+
+/* cart styles */
+@media (min-width: 769px){
+  .cart{
+    position:sticky; /* ALTERAÇÃO PRINCIPAL: Faz o carrinho 'grudar' */
+    top: 24px;       /* Define a distância do topo da tela para grudar. Usei 24px para alinhar com o padding do body. */
+  }
+}
+
+.cart{
+  background:var(--card);
+  padding:14px;
+  border-radius:var(--radius);
+  box-shadow: 0 6px 18px var(--shadow);
+}
+.cart h3{margin-top:0}
+.cart .items-list{display:flex;flex-direction:column;gap:8px; max-height:360px; overflow:auto; margin-bottom:12px}
+.cart-item{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px;border-radius:8px;background:#fff}
+.qty{
+  display:flex;
+  gap:6px;
+  align-items:center;
+}
+.qty button{background:#eee;border-radius:6px;padding:6px 8px;border:0;cursor:pointer}
+.total-row{display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-weight:700;font-size:18px}
+
+/* admin styles */
+.order{
+  background:#fff;
+  padding:12px;
+  border-radius:10px;
+  box-shadow:0 6px 14px var(--shadow);
+  margin-bottom:15px;
+}
+.order-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:8px;
+  font-size:18px;
+}
+.customer-info{
+  margin-bottom:8px;
+}
+.order-items-list{
+  list-style:disc;
+  padding-left:20px;
+  margin:8px 0;
+  font-size:14px;
+}
+.order-total{
+  border-top:1px solid #eee;
+  padding-top:8px;
+  font-size:16px;
+  margin-top:10px;
+}
+.status-badge{
+  font-size:12px;
+  font-weight:700;
+  padding:4px 8px;
+  border-radius:6px;
+}
+.order.pending .status-badge{background:#e6e6e6; color:#333}
+.order.preparing .status-badge{background:#007bff; color:#fff}
+.order.ready .status-badge{background:#ffc107; color:#333}
+.order.completed .status-badge{background:var(--success); color:#fff}
+.order.cancelled .status-badge{background:var(--danger); color:#fff}
+
+/* admin footer */
+.footer{
+  margin-top:40px;
+  border-top:1px solid #ddd;
+  padding-top:15px;
+  text-align:center;
+  color:var(--muted);
+  font-size:12px;
+}
+/* EFEITO SANFONA (ACORDION) */
+.category .items {
+  max-height: 0; /* Esconde o conteúdo por padrão */
+  overflow: hidden; /* Garante que o conteúdo não vaze */
+  transition: max-height 0.3s ease-out; /* Adiciona uma transição suave */
+}
+
+.category.open .items {
+  max-height: 500px; /* Um valor grande o suficiente para mostrar o conteúdo */
+}
+
+/* Opcional: Estiliza o cabeçalho para indicar que é clicável */
+.category h3 {
+  cursor: pointer;
+  padding: 4px 0; /* Adiciona um pequeno padding para o clique */
+}
